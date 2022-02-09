@@ -18,4 +18,4 @@ $ python gen_svg_anime.py
 ### result/svg_aninmation.svg
 <img src="result/svg_animation.svg" width="100%" />
 
-### Check also [result/visualizer.html](result/visualizer.html).
+Check also [result/visualizer.html](result/visualizer.html) with your web browser.

@@ -1,6 +1,8 @@
 # Motion SVG Visuzlizer
 Simple and light implementation of svg animation writer.
+
 The sample script load csv files and generate svg animation as follows.
+
 This software is released under the MIT License, see LICENSE.txt
 
 ## How to install

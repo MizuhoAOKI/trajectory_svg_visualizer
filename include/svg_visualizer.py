@@ -10,8 +10,8 @@ def svg_visualizer(timestamp, car_x_ary, car_y_ary, ref_x_ary, ref_y_ary, output
     MARGIN_RATE = 10 # % of maximum width/height
     MIN_MARGIN_X = 100 # px
     MIN_MARGIN_Y = 100 # px
-    DATA_SCALE = 10
-    FF_SCALE = 1
+    DATA_SCALE = 10 # rate of magnification compared to the car
+    FF_SCALE = 1 # default: 1 means normal(1x) speed.
     SIM_TIME = timestamp[-1]
 
     # Load svg template
@@ -49,9 +49,9 @@ def svg_visualizer(timestamp, car_x_ary, car_y_ary, ref_x_ary, ref_y_ary, output
     # Set viewbox 
     viewbox_code = str(min_x) + "," + str(min_y) + "," + str(viewbox_width) + "," + str(viewbox_height)
 
-    # Set reference path 変更
+    # Set reference path
     for i in range(len(ref_x_ary)):
-        ref_path_code += " " + str(ref_x_ary[i] + margin_x) + "," + str(ref_y_ary[i] + margin_y) + " " # svg_path_code変える
+        ref_path_code += " " + str(ref_x_ary[i] + margin_x) + "," + str(ref_y_ary[i] + margin_y) + " "
 
     # Set vehicle trajectory
     for i in range(len(timestamp)):
@@ -69,13 +69,13 @@ def svg_visualizer(timestamp, car_x_ary, car_y_ary, ref_x_ary, ref_y_ary, output
 
     # Replace svg template
     output = output.replace("$REFERENCEPATH$", ref_path_code)
-    output = output.replace("$TRAJECTORY$", svg_path_code)
-    output = output.replace("$VIEWBOX$"   , viewbox_code)
-    output = output.replace("$WIDTH$"     , str(viewbox_width))
-    output = output.replace("$HEIGHT$"    , str(viewbox_height))
-    output = output.replace("$SIMTIME$"   , str(SIM_TIME/FF_SCALE))
-    output = output.replace("$KEYTIMES$"  , keytimes_code)
-    output = output.replace("$KEYPOINTS$" , keypoints_code)
+    output = output.replace("$TRAJECTORY$"   , svg_path_code)
+    output = output.replace("$VIEWBOX$"      , viewbox_code)
+    output = output.replace("$WIDTH$"        , str(viewbox_width))
+    output = output.replace("$HEIGHT$"       , str(viewbox_height))
+    output = output.replace("$SIMTIME$"      , str(SIM_TIME/FF_SCALE))
+    output = output.replace("$KEYTIMES$"     , keytimes_code)
+    output = output.replace("$KEYPOINTS$"    , keypoints_code)
 
     # Output svg data
     svg_output = open(outputpath, 'w')
